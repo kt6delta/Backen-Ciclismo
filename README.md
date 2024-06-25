@@ -1,7 +1,8 @@
 Express
 
 - Esta rama despliega todo lo que tenga adentro
-
+- Sean consistentes con la estructura del codigo!!!
+- pueden usar share para ayudarse como en replit!! extension de visual
 # BD deplegada
 
 <https://auth-db1183.hstgr.io/index.php?db=u187294548_TMD>

@@ -1,0 +1,22 @@
+Select * from usuario;
+
+Select * from masajista;
+
+Select * from director;
+
+Select * from ciclista;
+
+SELECT Ci.idciclista, U.nombre, U.email, U.sexo, U.rol_id, 
+                       Ci.especialidad_id, Ci.contextura, Ci.tiempo_acumulado 
+                FROM usuario U
+                INNER JOIN ciclista Ci ON U.idusuario = Ci.idciclista
+                WHERE Ci.idciclista = 122432;
+				
+				
+SELECT Di.iddirector, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad 
+FROM usuario U INNER JOIN director Di ON U.idusuario = Di.iddirector 
+WHERE Di.iddirector = 13256;
+
+SELECT Ma.idmasajista, U.nombre, U.email, U.sexo, U.rol_id, Ma.anios_experiencia 
+FROM usuario U INNER JOIN masajista Ma ON U.idusuario = Ma.idmasajista 
+WHERE Ma.idmasajista = 13256;

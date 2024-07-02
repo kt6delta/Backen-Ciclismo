@@ -3,9 +3,13 @@ Express
 - Esta rama despliega todo lo que tenga adentro
 - Sean consistentes con la estructura del codigo!!!
 - pueden usar share para ayudarse como en replit!! extension de visual
-# BD deplegada
 
-# render
+# depliegue
+
+## render
+
+### BD
+
 PostgreSQL Version
 16
 
@@ -17,10 +21,10 @@ HOST: dpg-cq24a56ehbks7382i5mg-a
 
 Internal Database URL:postgresql://kt6delta:8q34RIERG6bjxpwi8GV11xdCj3mGBgfx@dpg-cq24a56ehbks7382i5mg-a/ciclismodb
 
-External Database URL: postgresql://kt6delta:8q34RIERG6bjxpwi8GV11xdCj3mGBgfx@dpg-cq24a56ehbks7382i5mg-a.oregon-postgres.render.com/ciclismodb
+External Database URL: postgresql://kt6delta:<8q34RIERG6bjxpwi8GV11xdCj3mGBgfx@dpg-cq24a56ehbks7382i5mg-a.oregon-postgres.render.com>/ciclismodb
 PSQL Command: PGPASSWORD=8q34RIERG6bjxpwi8GV11xdCj3mGBgfx psql -h dpg-cq24a56ehbks7382i5mg-a.oregon-postgres.render.com -U kt6delta ciclismodb
 
-# Backend Desplegado
+# Backend
 
 URI: <https://backen-ciclismo.onrender.com>
 

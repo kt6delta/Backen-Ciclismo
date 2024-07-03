@@ -28,11 +28,11 @@ const perfilCiclista = async (req, res) => {
 const crearUsuarioCiclista = async (req, res) => {
     try {
         //console.log('Datos recibidos en el body:', req.body);
-        const { idUsuario, nombre, email, sexo, rol_id, especialidad_id, contextura } = req.body;
-        const password = generarPassword(idUsuario, nombre);
+        const { idusuario, nombre, email, sexo, rol_id, especialidad_id, contextura } = req.body;
+        const password = generarPassword(idusuario, nombre);
         const tiempo_acumulado = "0";
 
-        const ciclista = UsuarioFactory.createUsuario('ciclista', [idUsuario, nombre, email, password, sexo, rol_id, especialidad_id, contextura, tiempo_acumulado]);
+        const ciclista = UsuarioFactory.createUsuario('ciclista', [idusuario, nombre, email, password, sexo, rol_id, especialidad_id, contextura, tiempo_acumulado]);
         
         //console.log('Objeto ciclista creado:', ciclista);
         

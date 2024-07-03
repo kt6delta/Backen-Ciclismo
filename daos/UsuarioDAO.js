@@ -45,7 +45,7 @@ class UsuarioDAO {
                 VALUES ($1, $2, $3, $4, $5, $6)
             `;
             const values = [
-                usuario.idUsuario,
+                usuario.idusuario,
                 usuario.nombre,
                 usuario.email,
                 usuario.password,

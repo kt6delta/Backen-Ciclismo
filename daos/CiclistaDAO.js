@@ -32,7 +32,7 @@ class CiclistaDAO extends UsuarioDAO {
                 VALUES ($1, $2, $3, $4)
             `;
 			const values = [
-				ciclista.idUsuario,
+				ciclista.idusuario,
 				ciclista.especialidad_id,
 				ciclista.contextura,
 				ciclista.tiempo_acumulado,

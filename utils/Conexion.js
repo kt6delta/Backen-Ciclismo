@@ -8,7 +8,7 @@ class Database {
         host: "localhost",
         user: "postgres",
         port: 5432,
-        password: "toor",
+        password: "2828",
         database: "proyecto_patrones"
       });
 

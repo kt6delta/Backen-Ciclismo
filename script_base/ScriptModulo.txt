@@ -1,3 +1,5 @@
+Select * from equipo;
+
 Select * from usuario;
 
 Select * from masajista;
@@ -6,17 +8,89 @@ Select * from director;
 
 Select * from ciclista;
 
-SELECT Ci.idciclista, U.nombre, U.email, U.sexo, U.rol_id, 
-                       Ci.especialidad_id, Ci.contextura, Ci.tiempo_acumulado 
-                FROM usuario U
-                INNER JOIN ciclista Ci ON U.idusuario = Ci.idciclista
-                WHERE Ci.idciclista = 122432;
-				
-				
-SELECT Di.iddirector, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad 
-FROM usuario U INNER JOIN director Di ON U.idusuario = Di.iddirector 
-WHERE Di.iddirector = 13256;
+Select * from especialidad;
 
-SELECT Ma.idmasajista, U.nombre, U.email, U.sexo, U.rol_id, Ma.anios_experiencia 
-FROM usuario U INNER JOIN masajista Ma ON U.idusuario = Ma.idmasajista 
-WHERE Ma.idmasajista = 13256;
+INSERT INTO equipo (nombre, pais, tiempo_total, participantes_equipo)
+VALUES ('Equipo A', 'España', 0, '[
+    {"id": 856765, "tipo": "ciclista"}]');
+	
+UPDATE ciclista
+SET equipo_id = 1
+WHERE idciclista = 856765;
+
+
+UPDATE director
+SET equipo_id = 1
+WHERE iddirector = 13256;
+
+--Ciclista
+SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ci.especialidad_id, Ci.contextura, Ci.tiempo_acumulado 
+FROM usuario U INNER JOIN ciclista Ci ON U.idusuario = Ci.idciclista 
+WHERE U.idusuario = 856765;
+
+--Director
+SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad 
+FROM usuario U INNER JOIN director Di ON U.idusuario = Di.iddirector 
+WHERE U.idusuario = 13256;
+
+--Masajista
+SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ma.anios_experiencia 
+FROM usuario U INNER JOIN masajista Ma ON U.idusuario = Ma.idmasajista  
+WHERE U.idusuario = 13256;
+
+--Todos: Cadencia de pedaleo
+--	Contrarrelojeros:  visualizar, concentrarse y regular
+--	escaladores: pedalear sentado y pedalear de pie.
+--	embaladores aumentar ritmo y bajar ritmo
+--	Rodaderos, gregarios , clasicómano no tienen tarea adicionalfuncioneles
+
+
+-- Eliminar la columna descripcion
+ALTER TABLE Especialidad
+DROP COLUMN descripcion;
+
+-- Añadir la columna acciones
+ALTER TABLE Especialidad
+ADD COLUMN acciones TEXT[];
+
+-- Población de la columna acciones
+UPDATE Especialidad
+SET acciones = ARRAY['Cadencia de pedaleo', 'pedalear sentado', 'pedalear de pie']
+WHERE idEspecialidad = 1;
+
+UPDATE Especialidad
+SET acciones = ARRAY['Cadencia de pedaleo']
+WHERE idEspecialidad = 2;
+
+UPDATE Especialidad
+SET acciones = ARRAY['Cadencia de pedaleo', 'aumentar ritmo', 'bajar ritmo']
+WHERE idEspecialidad = 3;
+
+UPDATE Especialidad
+SET acciones = ARRAY['Cadencia de pedaleo']
+WHERE idEspecialidad = 4;
+
+UPDATE Especialidad
+SET acciones = ARRAY['Cadencia de pedaleo']
+WHERE idEspecialidad = 5;
+
+UPDATE Especialidad
+SET acciones = ARRAY['Cadencia de pedaleo', 'visualizar', 'concentrarse', 'regular']
+WHERE idEspecialidad = 6;
+
+--Ciclista
+SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ci.especialidad_id, Ci.contextura, 
+Ci.tiempo_acumulado,  E.nombre nombreequipo, Esp.acciones
+FROM usuario U, ciclista Ci, equipo E, especialidad Esp
+WHERE U.idusuario = Ci.idciclista and
+Ci.equipo_id = E.idequipo and
+Esp.idespecialidad = Ci.especialidad_id and
+U.idusuario = 856765;
+
+
+--Director
+SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad, E.nombre nombreequipo
+FROM usuario U, director Di, equipo E
+WHERE U.idusuario = Di.iddirector and
+Di.equipo_id = E.idequipo and
+U.idusuario = 13256;

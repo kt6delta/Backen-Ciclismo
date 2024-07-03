@@ -1,6 +1,7 @@
 const nodemailer = require('nodemailer');
 const { google } = require('googleapis');
 const config = require('./Config');
+const logger = require('./logger');
 
 const oAuth2Client = new google.auth.OAuth2(
   config.CLIENT_ID,

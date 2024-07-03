@@ -14,7 +14,7 @@ const perfilMasajista = async (req, res) => {
             return res.status(401).json({ message: 'Credenciales incorrectas' });
         }
 
-        res.status(200).json(masajista);
+        res.status(200).json({idusuario: masajista.idusuario, nombre: masajista.nombre, email: masajista.email, sexo: masajista.sexo, rol_id: masajista.rol_id, anios_experiencia: masajista.anios_experiencia });
     } catch (error) {
         console.error('Error para obtener masajista:', error.message, error.stack);
         res.status(500).json({ error: 'Error interno del servidor' });
@@ -26,10 +26,10 @@ const crearUsuarioMasajista = async (req, res) => {
 
     try {
         //console.log('Datos recibidos en el body:', req.body);
-        const { idUsuario, nombre, email, sexo, rol_id, anios_experiencia } = req.body;
-        const password = generarPassword(idUsuario, nombre);
+        const { idusuario, nombre, email, sexo, rol_id, anios_experiencia } = req.body;
+        const password = generarPassword(idusuario, nombre);
 
-        const masajista = UsuarioFactory.createUsuario('masajista', [idUsuario, nombre, email, password, sexo, rol_id, anios_experiencia]);
+        const masajista = UsuarioFactory.createUsuario('masajista', [idusuario, nombre, email, password, sexo, rol_id, anios_experiencia]);
         
         //console.log('Objeto director creado:', masajista);
 

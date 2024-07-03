@@ -3,7 +3,7 @@ const { getEquipo, crearEquipo } = require('../controllers/EquipoController');
 
 const router = express.Router();
 
-router.get('/getEquipo', getEquipo);
-router.post('/crearEquipo', crearEquipo);
+router.get('/equipo', getEquipo);
+router.post('/equipo/crear_equipo', crearEquipo);
 
 module.exports = router;

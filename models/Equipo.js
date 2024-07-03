@@ -1,7 +1,6 @@
 class Equipo{
 
-    constructor(idequipo, nombre, pais, tiempo_total, participantes_equipo) {
-        this.idequipo = idequipo;
+    constructor(nombre, pais, tiempo_total, participantes_equipo) {
         this.nombre = nombre;
         this.pais = pais;
         this.tiempo_total = tiempo_total;

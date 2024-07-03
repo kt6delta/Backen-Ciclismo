@@ -2,15 +2,33 @@ const UsuarioDAO = require("./UsuarioDAO");
 const db = require("../utils/Conexion");
 
 class CiclistaDAO extends UsuarioDAO {
+
 	async getCiclistaByID(idusuario) {
 		try {
 			console.log("Obteniendo ciclista");
 			const response = await db.query(
-				"SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ci.especialidad_id, Ci.contextura, Ci.tiempo_acumulado FROM usuario U INNER JOIN ciclista Ci ON U.idusuario = Ci.idciclista WHERE U.idusuario = $1",
+				`SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ci.especialidad_id, Ci.contextura, 
+				Ci.tiempo_acumulado,  E.nombre nombreequipo, Esp.acciones
+				FROM usuario U, ciclista Ci, equipo E, especialidad Esp
+				WHERE U.idusuario = Ci.idciclista and
+				Ci.equipo_id = E.idequipo and
+				Esp.idespecialidad = Ci.especialidad_id and
+				U.idusuario = $1`,
 				[idusuario]
 			);
 
-			return response.rows;
+			// Verificamos si se encontró el usuario
+            if (response.rows.length === 0) {
+                console.log('Usuario no encontrado');
+                return null;
+            }
+
+            // Retornamos el primer usuario encontrado (debería ser único)
+            const usuario = response.rows[0];
+
+			//console.log(usuario);
+		
+			return usuario;
 		} catch (error) {
 			console.error(
 				"Error al obtener ciclista:",
@@ -32,7 +50,7 @@ class CiclistaDAO extends UsuarioDAO {
                 VALUES ($1, $2, $3, $4)
             `;
 			const values = [
-				ciclista.idUsuario,
+				ciclista.idusuario,
 				ciclista.especialidad_id,
 				ciclista.contextura,
 				ciclista.tiempo_acumulado,

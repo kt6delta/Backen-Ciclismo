@@ -15,10 +15,10 @@ const getEquipo = async (req, res) => {
 const crearEquipo = async (req, res) => {
 	try {
 		console.log("Datos recibidos en el body:", req.body);
-		const { idequipo, nombre, pais, participantes_equipo } = req.body;
+		const { nombre, pais, participantes_equipo } = req.body;
 		const tiempo_total = 0;
 
-		const equipo = UsuarioFactory.createEquipo("equipo", [idequipo, nombre, pais, tiempo_total, participantes_equipo]);
+		const equipo = UsuarioFactory.createEquipo([nombre, pais, tiempo_total, participantes_equipo]);
 
 		await equipoDAO.createEquipo(equipo);
 

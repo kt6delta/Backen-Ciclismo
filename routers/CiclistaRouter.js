@@ -4,6 +4,7 @@ const { crearUsuarioCiclista, perfilCiclista } = require('../controllers/Usuario
 const router = express.Router();
 
 router.post('/usuarios/crearUsuarioCiclista', crearUsuarioCiclista);
-router.get('/usuarios/perfilCiclista', perfilCiclista);
+router.post('/usuarios/perfilCiclista', perfilCiclista);
+
 
 module.exports = router;

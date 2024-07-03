@@ -10,7 +10,18 @@ class MasajistaDAO extends UsuarioDAO {
 				[idusuario]
 			);
 
-			return response.rows;
+			// Verificamos si se encontró el usuario
+            if (response.rows.length === 0) {
+                console.log('Usuario no encontrado');
+                return null;
+            }
+
+            // Retornamos el primer usuario encontrado (debería ser único)
+            const usuario = response.rows[0];
+
+			//console.log(usuario);
+		
+			return usuario;
 		} catch (error) {
 			console.error(
 				"Error al obtener masajista:",
@@ -28,7 +39,7 @@ class MasajistaDAO extends UsuarioDAO {
                 INSERT INTO masajista (idmasajista, anios_experiencia)
                 VALUES ($1, $2)
             `;
-			const values = [masajista.idUsuario, masajista.anios_experiencia];
+			const values = [masajista.idusuario, masajista.anios_experiencia];
 			await db.query(query, values);
 		} catch (error) {
 			console.error("Error al crear masajista:", error);

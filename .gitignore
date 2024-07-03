@@ -1,5 +1,4 @@
 #aqui van todos los de node que no se suben al repositorio
 .env
-/utils/nodemailer.js
 node_modules/
 /build/

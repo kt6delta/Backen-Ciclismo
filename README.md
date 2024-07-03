@@ -19,4 +19,4 @@ URI: <https://backen-ciclismo.onrender.com>
 
 # SERVICIO USSADO
 
-render
+### PostgreSQL Version: 16

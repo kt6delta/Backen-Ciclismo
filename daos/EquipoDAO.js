@@ -15,13 +15,12 @@ class EquipoDAO {
 	async createEquipo(equipo) {
 		try {
 			console.log("Creando equipo con los siguientes datos:", equipo);
-			const query = `INSERT INTO equipo (idequipo, nombre, pais, tiempo_total, participantes_equipo) VALUES ($1, $2, $3, $4, $5, $6)`;
+			const query = `INSERT INTO equipo (nombre, pais, tiempo_total, participantes_equipo) VALUES ($1, $2, $3, $4)`;
 			const values = [
-				equipo.idequipo,
 				equipo.nombre,
 				equipo.pais,
 				equipo.tiempo_total,
-				equipo.participantes_equipo,
+				JSON.stringify(equipo.participantes_equipo)
 			];
 			await db.query(query, values);
 			console.log("Equipo creado en la base de datos");

@@ -50,6 +50,24 @@ class DirectorDAO extends UsuarioDAO {
 			throw new Error("Error interno del servidor");
 		}
 	}
+
+	async actualizarDirectorConEquipo(equipoId, director_id) {
+        try {
+
+			const query = `UPDATE director SET equipo_id = $1 WHERE iddirector = $2`;
+			const values = [equipoId, director_id];
+
+			console.log(`Director con ID ${director_id} actualizado con equipo_id ${equipoId}`);
+			await db.query(query, values);
+            
+        } catch (error) {
+            console.error("Error al actualizar director con equipo:", error.message, error.stack);
+            throw new Error("Error interno del servidor");
+        }
+    }
+
+
+
 }
 
 module.exports = DirectorDAO;

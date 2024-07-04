@@ -46,6 +46,23 @@ class MasajistaDAO extends UsuarioDAO {
 			throw new Error("Error interno del servidor");
 		}
 	}
+
+	async actualizarMasajistasConEquipo(equipoId, masajistas) {
+        try {
+            for (let masajistaId of masajistas) {
+                await db.query(
+                    `UPDATE masajista SET equipo_id = $1 WHERE idmasajista = $2`,
+                    [equipoId, masajistaId]
+                );
+                console.log(`Masajista con ID ${masajistaId} actualizado con equipo_id ${equipoId}`);
+            }
+
+        } catch (error) {
+            console.error("Error al actualizar ciclistas con equipo:", error.message, error.stack);
+            throw new Error("Error interno del servidor");
+        }
+    }
+
 }
 
 module.exports = MasajistaDAO;

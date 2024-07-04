@@ -20,9 +20,6 @@ const login = async (req, res) => {
         if (!usuario) {
             return res.status(401).json({ message: 'Credenciales incorrectas' });
         }
-        // Puedes almacenar el ID del usuario en la sesión, JWT, etc.
-        //console.log('ID del usuario autenticado:', usuario.idusuario);
-        //console.log('ID del usuario autenticado:', usuario.rol_id);
         res.status(200).json({idusuario: usuario.idusuario, rol_id: usuario.rol_id});
     } catch (error) {
         console.error('Error en loginUsuario:', error.message, error.stack);

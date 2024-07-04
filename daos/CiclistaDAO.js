@@ -39,6 +39,11 @@ class CiclistaDAO extends UsuarioDAO {
 		}
 	}
 
+	async insertarCiclsitaEquipo(){
+
+		
+	}
+
 	async createCiclista(ciclista) {
 		//console.log('Creando ciclista con los siguientes datos:', ciclista);
 		try {
@@ -66,6 +71,31 @@ class CiclistaDAO extends UsuarioDAO {
 			throw new Error("Error interno del servidor");
 		}
 	}
+
+
+	async actualizarCiclistasConEquipo(equipoId, participantesEquipo) {
+        try {
+            const especialidades = Object.keys(participantesEquipo);
+
+            for (let especialidad of especialidades) {
+                const ciclistas = participantesEquipo[especialidad];
+
+                for (let ciclista of ciclistas) {
+                    await db.query(
+                        `UPDATE ciclista SET equipo_id = $1 WHERE idciclista = $2`,
+                        [equipoId, ciclista.id]
+                    );
+                    console.log(`Ciclista con ID ${ciclista.id} actualizado con equipo_id ${equipoId}`);
+                }
+            }
+        } catch (error) {
+            console.error("Error al actualizar ciclistas con equipo:", error.message, error.stack);
+            throw new Error("Error interno del servidor");
+        }
+    }
+
+
+	
 }
 
 module.exports = CiclistaDAO;

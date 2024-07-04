@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('dotenv').config();
 const PORT = process.env.PORT
 
 const CLIENT_ID = process.env.CLIENT_ID

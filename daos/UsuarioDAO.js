@@ -17,7 +17,7 @@ class UsuarioDAO {
             
             // Consulta SQL para buscar el usuario por email y contraseña
             const response = await db.query(
-                'SELECT idusuario FROM usuario WHERE email = $1 AND password = $2', 
+                'SELECT idusuario, rol_id FROM usuario WHERE email = $1 AND password = $2', 
                 [email, password]
             );
             
@@ -29,7 +29,7 @@ class UsuarioDAO {
 
             // Retornamos el primer usuario encontrado (debería ser único)
             const usuario = response.rows[0];
-            console.log('Usuario encontrado:', usuario);
+            //console.log('Usuario encontrado:');
             return usuario;
         } catch (error) {
             console.error('Error al obtener usuario por email y contraseña:', error.message, error.stack);
@@ -45,7 +45,7 @@ class UsuarioDAO {
                 VALUES ($1, $2, $3, $4, $5, $6)
             `;
             const values = [
-                usuario.idUsuario,
+                usuario.idusuario,
                 usuario.nombre,
                 usuario.email,
                 usuario.password,

@@ -10,7 +10,18 @@ class MasajistaDAO extends UsuarioDAO {
 				[idusuario]
 			);
 
-			return response.rows;
+			// Verificamos si se encontró el usuario
+            if (response.rows.length === 0) {
+                console.log('Usuario no encontrado');
+                return null;
+            }
+
+            // Retornamos el primer usuario encontrado (debería ser único)
+            const usuario = response.rows[0];
+
+			//console.log(usuario);
+		
+			return usuario;
 		} catch (error) {
 			console.error(
 				"Error al obtener masajista:",
@@ -28,13 +39,30 @@ class MasajistaDAO extends UsuarioDAO {
                 INSERT INTO masajista (idmasajista, anios_experiencia)
                 VALUES ($1, $2)
             `;
-			const values = [masajista.idUsuario, masajista.anios_experiencia];
+			const values = [masajista.idusuario, masajista.anios_experiencia];
 			await db.query(query, values);
 		} catch (error) {
 			console.error("Error al crear masajista:", error);
 			throw new Error("Error interno del servidor");
 		}
 	}
+
+	async actualizarMasajistasConEquipo(equipoId, masajistas) {
+        try {
+            for (let masajistaId of masajistas) {
+                await db.query(
+                    `UPDATE masajista SET equipo_id = $1 WHERE idmasajista = $2`,
+                    [equipoId, masajistaId]
+                );
+                console.log(`Masajista con ID ${masajistaId} actualizado con equipo_id ${equipoId}`);
+            }
+
+        } catch (error) {
+            console.error("Error al actualizar ciclistas con equipo:", error.message, error.stack);
+            throw new Error("Error interno del servidor");
+        }
+    }
+
 }
 
 module.exports = MasajistaDAO;

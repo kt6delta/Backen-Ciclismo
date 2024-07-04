@@ -4,6 +4,6 @@ const { crearUsuarioDirector, perfilDirector } = require('../controllers/Usuario
 const router = express.Router();
 
 router.post('/usuarios/crearUsuarioDirector', crearUsuarioDirector);
-router.get('/usuarios/perfilDirector', perfilDirector);
+router.post('/usuarios/perfilDirector', perfilDirector);
 
 module.exports = router;

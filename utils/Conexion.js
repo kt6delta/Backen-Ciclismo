@@ -10,7 +10,10 @@ class Database {
         user: config.BD_USER,
         port: config.BD_PORT,
         password: config.BD_PASSWORD,
-        database: config.BD_NAME
+        database: config.BD_NAME,
+        ssl: {
+          rejectUnauthorized: false
+        }
       });
       Database.instance = this;
     }

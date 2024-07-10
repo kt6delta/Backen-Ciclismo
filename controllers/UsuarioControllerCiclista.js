@@ -9,7 +9,7 @@ const ciclistaDAO = new CiclistaDAO();
 const perfilCiclista = async (req, res) => {
     try {
         const { idusuario } = req.body;
-        console.log(idusuario);s
+        console.log(idusuario);
         const ciclista = await ciclistaDAO.getCiclistaByID(idusuario);
         
         if (!ciclista) {

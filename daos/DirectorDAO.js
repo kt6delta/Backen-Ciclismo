@@ -6,11 +6,26 @@ class DirectorDAO extends UsuarioDAO {
 		try {
 			console.log("Obteniendo director");
 			const response = await db.query(
-				"SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad FROM usuario U INNER JOIN director Di ON U.idusuario = Di.iddirector WHERE U.idusuario = $1",
+				`SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad, E.nombre nombreequipo
+				FROM usuario U, director Di, equipo E
+				WHERE U.idusuario = Di.iddirector and
+				Di.equipo_id = E.idequipo and
+				U.idusuario = $1`,
 				[idusuario]
 			);
 
-			return response.rows;
+			// Verificamos si se encontró el usuario
+            if (response.rows.length === 0) {
+                console.log('Usuario no encontrado');
+                return null;
+            }
+
+            // Retornamos el primer usuario encontrado (debería ser único)
+            const usuario = response.rows[0];
+
+			//console.log(usuario);
+		
+			return usuario;
 		} catch (error) {
 			console.error(
 				"Error al obtener director:",
@@ -28,13 +43,31 @@ class DirectorDAO extends UsuarioDAO {
                 INSERT INTO director (iddirector, nacionalidad)
                 VALUES ($1, $2)
             `;
-			const values = [director.idUsuario, director.nacionalidad];
+			const values = [director.idusuario, director.nacionalidad];
 			await db.query(query, values);
 		} catch (error) {
 			console.error("Error al crear director:", error);
 			throw new Error("Error interno del servidor");
 		}
 	}
+
+	async actualizarDirectorConEquipo(equipoId, director_id) {
+        try {
+
+			const query = `UPDATE director SET equipo_id = $1 WHERE iddirector = $2`;
+			const values = [equipoId, director_id];
+
+			console.log(`Director con ID ${director_id} actualizado con equipo_id ${equipoId}`);
+			await db.query(query, values);
+            
+        } catch (error) {
+            console.error("Error al actualizar director con equipo:", error.message, error.stack);
+            throw new Error("Error interno del servidor");
+        }
+    }
+
+
+
 }
 
 module.exports = DirectorDAO;

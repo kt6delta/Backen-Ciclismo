@@ -1,7 +1,6 @@
 const Ciclista = require('./Ciclista');
 const Director = require('./Director');
 const Masajista = require('./Masajista');
-const Equipo = require('./Equipo');
 
 class UsuarioFactory{
     static createUsuario(tipo, datos) {
@@ -15,10 +14,6 @@ class UsuarioFactory{
             default:
                 throw new Error('Tipo no soportado');
         }
-    }
-
-    static createEquipo(datos) {
-        return new Equipo(...datos);
     }
 }
 

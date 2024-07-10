@@ -8,7 +8,7 @@ CREATE TABLE Rol(
 CREATE TABLE Especialidad (
     idEspecialidad INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     nombre VARCHAR(50) NOT NULL UNIQUE,
-    descripcion TEXT NOT NULL
+    acciones TEXT[] 
 );
 
 -- tabla administrador
@@ -34,13 +34,14 @@ CREATE TABLE Equipo (
     pais VARCHAR(100) NOT NULL,
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     tiempo_total INT DEFAULT 0
+    participantes_equipo JSON 
 );
 
 -- Crear tabla Ciclista
 CREATE TABLE Ciclista (
     idCiclista INT PRIMARY KEY,
     especialidad_id INT REFERENCES Especialidad(idEspecialidad),
-    contextura VARCHAR(100) NOT NULL,
+    contextura VARCHAR(100),
     equipo_id INT REFERENCES Equipo(idEquipo)
 );
 

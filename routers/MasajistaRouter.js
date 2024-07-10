@@ -4,6 +4,6 @@ const { crearUsuarioMasajista, perfilMasajista } = require('../controllers/Usuar
 const router = express.Router();
 
 router.post('/usuarios/crearUsuarioMasajista', crearUsuarioMasajista);
-router.get('/usuarios/perfilMasajista', perfilMasajista);
+router.post('/usuarios/perfilMasajista', perfilMasajista);
 
 module.exports = router;

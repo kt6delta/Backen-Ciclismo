@@ -6,10 +6,20 @@ const generarPassword = require('../utils/generarPassword');
 const ciclistaDAO = new CiclistaDAO();
 
 
+const getCiclistas = async (req, res) => {
+    try {
+        const ciclistas = await ciclistaDAO.getAllCiclista();
+        res.status(200).json(ciclistas);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+
 const perfilCiclista = async (req, res) => {
     try {
         const { idusuario } = req.body;
-        console.log(idusuario);s
+        console.log(idusuario);
         const ciclista = await ciclistaDAO.getCiclistaByID(idusuario);
         
         if (!ciclista) {
@@ -48,6 +58,7 @@ const crearUsuarioCiclista = async (req, res) => {
 };
 
 module.exports = {
+    getCiclistas,
     crearUsuarioCiclista,
     perfilCiclista
 };

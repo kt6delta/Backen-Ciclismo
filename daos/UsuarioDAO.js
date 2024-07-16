@@ -1,7 +1,7 @@
 const db = require('../utils/Conexion');
 
 class UsuarioDAO {
-    async getAllUsuarios(idciclista) {
+    async getAllUsuarios() {
         try {
             console.log('Obteniendo todos los usuarios');
             const response = await db.query('SELECT * FROM usuario');

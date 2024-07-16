@@ -2,6 +2,21 @@ const UsuarioDAO = require("./UsuarioDAO");
 const db = require("../utils/Conexion");
 
 class DirectorDAO extends UsuarioDAO {
+
+	async getAllDirectores() {
+        try {
+            console.log('Obteniendo todos los director');
+            const response = await db.query('SELECT * FROM director');
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener director:', error.message, error.stack);
+            throw new Error('Error interno del servidor');
+        }
+    }
+
+
+
+
 	async getDirectorByID(idusuario) {
 		try {
 			console.log("Obteniendo director");
@@ -9,7 +24,6 @@ class DirectorDAO extends UsuarioDAO {
 				`SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Di.nacionalidad, E.nombre nombreequipo
 				FROM usuario U, director Di, equipo E
 				WHERE U.idusuario = Di.iddirector and
-				Di.equipo_id = E.idequipo and
 				U.idusuario = $1`,
 				[idusuario]
 			);

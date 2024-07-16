@@ -5,6 +5,16 @@ const generarPassword = require('../utils/generarPassword');
 
 const masajistaDAO = new MasajistaDAO();
 
+const getMasajistas = async (req, res) => {
+    try {
+        const masajistas = await masajistaDAO.getAllMasajistas();
+        res.status(200).json(masajistas);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
+
 const perfilMasajista = async (req, res) => {
     try {
         const { idusuario} = req.body;
@@ -46,6 +56,7 @@ const crearUsuarioMasajista = async (req, res) => {
 };
 
 module.exports = {
+    getMasajistas,
     crearUsuarioMasajista,
     perfilMasajista
 };

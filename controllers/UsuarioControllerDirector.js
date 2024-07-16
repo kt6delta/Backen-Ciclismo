@@ -5,6 +5,15 @@ const generarPassword = require('../utils/generarPassword');
 
 const directorDAO = new DirectorDAO();
 
+const getDirectores = async (req, res) => {
+    try {
+        const direcores = await directorDAO.getAllDirectores();
+        res.status(200).json(direcores);
+    } catch (error) {
+        res.status(500).json({ error: 'Error interno del servidor' });
+    }
+};
+
 const perfilDirector = async (req, res) => {
     try {
         const { idusuario} = req.body;
@@ -45,6 +54,7 @@ const crearUsuarioDirector = async (req, res) => {
 };
 
 module.exports = {
+    getDirectores,
     crearUsuarioDirector,
     perfilDirector
 };

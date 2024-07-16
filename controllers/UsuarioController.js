@@ -1,6 +1,5 @@
 const UsuarioDAO = require('../daos/UsuarioDAO');
 
-
 const usuarioDAO = new UsuarioDAO();
 
 const getUsuario = async (req, res) => {

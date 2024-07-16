@@ -3,15 +3,25 @@ const db = require("../utils/Conexion");
 
 class CiclistaDAO extends UsuarioDAO {
 
+	async getAllCiclista() {
+        try {
+            console.log('Obteniendo todos los ciclistas');
+            const response = await db.query('SELECT * FROM ciclista');
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener ciclistas:', error.message, error.stack);
+            throw new Error('Error interno del servidor');
+        }
+    }
+
+
 	async getCiclistaByID(idusuario) {
 		try {
 			console.log("Obteniendo ciclista");
 			const response = await db.query(
-				`SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ci.especialidad_id, Ci.contextura, 
-				Ci.tiempo_acumulado,  E.nombre nombreequipo, Esp.acciones
+				`SELECT U.idusuario, U.nombre, U.email, U.sexo, U.rol_id, Ci.especialidad_id, Ci.contextura, Ci.tiempo_acumulado,  E.nombre nombreequipo, Esp.acciones
 				FROM usuario U, ciclista Ci, equipo E, especialidad Esp
 				WHERE U.idusuario = Ci.idciclista and
-				Ci.equipo_id = E.idequipo and
 				Esp.idespecialidad = Ci.especialidad_id and
 				U.idusuario = $1`,
 				[idusuario]

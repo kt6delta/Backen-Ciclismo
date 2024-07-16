@@ -2,6 +2,19 @@ const UsuarioDAO = require("./UsuarioDAO");
 const db = require("../utils/Conexion");
 
 class MasajistaDAO extends UsuarioDAO {
+
+	async getAllMasajistas() {
+        try {
+            console.log('Obteniendo todos los masajistas');
+            const response = await db.query('SELECT * FROM masajista');
+            return response.rows;
+        } catch (error) {
+            console.error('Error al obtener masajistas:', error.message, error.stack);
+            throw new Error('Error interno del servidor');
+        }
+    }
+
+
 	async getMasajistaByID(idusuario) {
 		try {
 			console.log("Obteniendo masajista");
